@@ -35,11 +35,8 @@
                 background-size: contain;
                 background-repeat: no-repeat;
             }
-            #op {
+            #p.open {
                 background-image: url('imgs/op.png');
-                background-position: bottom;
-                background-size: contain;
-                background-repeat: no-repeat;
             }
         </style>
     </head>
@@ -50,9 +47,17 @@
             
         </div>
         <div class="container" id="p2"></div>
+
+        <!-- 音頻元素 -->
+        <audio id="popSound" src="pops/pop1.mp3"></audio>
+
         <script>
             // 計數器初始化
             let count = 0;
+
+            // 預載張嘴圖片 op.png
+            const preloadImage = new Image();
+            preloadImage.src = 'imgs/op.png';
 
             // 寫一個 function: 計數器累加
             function incrementCount() {
@@ -61,25 +66,47 @@
                 document.getElementById('p').textContent = count;
             }
 
-            // 當滑鼠按下，切換張嘴圖片 (op.png)
-            function handleMouseDown() {
+            // 當按下按鍵或滑鼠時，添加張嘴 class、播放音效並計數
+            function handleDown() {
                 const catElement = document.getElementById('p');
-                catElement.id = 'op';
+                catElement.classList.add('open');  // 使用 classList 添加 open class
+                
+                // 播放 pops/pop1.mp3
+                const popSound = document.getElementById('popSound');
+                popSound.currentTime = 0;  // 重置播放位置
+                popSound.play();
+                
+                incrementCount();
             }
 
-            // 當滑鼠放開，切換回閉嘴圖片 (p.png)
-            function handleMouseUp() {
-                const catElement = document.getElementById('op');
-                if (catElement) {
-                    catElement.id = 'p';
-                }
+            // 當按鍵或滑鼠放開時，等待 25 毫秒後切換回閉嘴圖片
+            function handleUp() {
+                setTimeout(() => {
+                    const catElement = document.getElementById('p');
+                    catElement.classList.remove('open');  // 使用 classList 移除 open class
+                }, 25);
             }
 
             // 為貓咪添加事件監聽
             const cat = document.getElementById('p');
-            cat.addEventListener('click', incrementCount);
-            cat.addEventListener('mousedown', handleMouseDown);
-            document.addEventListener('mouseup', handleMouseUp);
+            
+            // 滑鼠事件
+            cat.addEventListener('mousedown', handleDown);
+            document.addEventListener('mouseup', handleUp);
+            
+            // 鍵盤事件 (除了滑鼠，也可以用鍵盤互動)
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    handleDown();
+                }
+            });
+            document.addEventListener('keyup', (e) => {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    handleUp();
+                }
+            });
         </script>
     </body>
 </html>
