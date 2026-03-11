@@ -35,12 +35,6 @@
                 background-size: contain;
                 background-repeat: no-repeat;
             }
-             #p2 {
-                background-image: url('imgs/p.png');
-                background-position: bottom;
-                background-size: contain;
-                background-repeat: no-repeat;
-            }
             #op {
                 background-image: url('imgs/op.png');
                 background-position: bottom;
@@ -56,6 +50,23 @@
             
         </div>
         <div class="container" id="p2"></div>
+        <script>
+            let count = 0;
+            let catImg = document.getElementById('p');
 
+            function addCount() {
+                count++;
+                catImg.innerHTML = count;
+                catImg.id = 'op';
+            }
+
+            let close = ()=> {
+                catImg.id = 'p';
+            }
+
+            document.addEventListener('pointerdown', addCount);
+            document.addEventListener('pointerup',close);
+
+        </script>
     </body>
 </html>
