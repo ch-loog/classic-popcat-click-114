@@ -57,5 +57,36 @@
         </div>
         <div class="container" id="p2"></div>
 
+        <script>
+            // 計數器初始化
+            let count = 0;
+
+            // 寫一個 function: 計數器累加
+            function incrementCount() {
+                count++;
+                console.log(count); // 在 console 下面觀察 count 的變化
+                document.getElementById('p').textContent = count;
+            }
+
+            // 當滑鼠按下，切換張嘴圖片 (op.png)
+            function handleMouseDown() {
+                const catElement = document.getElementById('p');
+                catElement.id = 'op';
+            }
+
+            // 當滑鼠放開，切換回閉嘴圖片 (p.png)
+            function handleMouseUp() {
+                const catElement = document.getElementById('op');
+                if (catElement) {
+                    catElement.id = 'p';
+                }
+            }
+
+            // 為貓咪添加事件監聽
+            const cat = document.getElementById('p');
+            cat.addEventListener('click', incrementCount);
+            cat.addEventListener('mousedown', handleMouseDown);
+            document.addEventListener('mouseup', handleMouseUp);
+        </script>
     </body>
 </html>
