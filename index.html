@@ -35,12 +35,6 @@
                 background-size: contain;
                 background-repeat: no-repeat;
             }
-             #p2 {
-                background-image: url('imgs/p.png');
-                background-position: bottom;
-                background-size: contain;
-                background-repeat: no-repeat;
-            }
             #op {
                 background-image: url('imgs/op.png');
                 background-position: bottom;
@@ -56,7 +50,11 @@
             
         </div>
         <div class="container" id="p2"></div>
+        <script>
+            let count = 0;
+            let catImg = document.getElementById('p');
 
+<<<<<<< HEAD
         <script>
             // 計數器初始化
             let count = 0;
@@ -87,6 +85,21 @@
             cat.addEventListener('click', incrementCount);
             cat.addEventListener('mousedown', handleMouseDown);
             document.addEventListener('mouseup', handleMouseUp);
+=======
+            function addCount() {
+                count++;
+                catImg.innerHTML = count;
+                catImg.id = 'op';
+            }
+
+            let close = ()=> {
+                catImg.id = 'p';
+            }
+
+            document.addEventListener('pointerdown', addCount);
+            document.addEventListener('pointerup',close);
+
+>>>>>>> e49394edf311aafe59986c84b729c3f48e7b9c84
         </script>
     </body>
 </html>
